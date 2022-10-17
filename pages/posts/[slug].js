@@ -6,7 +6,7 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 console.log("space", space);
 
-function List({ blogItems }) {
+function Slug({ blogItems }) {
   return (
     <div>
       {blogItems.map((blogItem) => (
@@ -20,7 +20,7 @@ function List({ blogItems }) {
   );
 }
 
-export default List;
+export default Slug;
 
 export async function getStaticProps() {
   // send a request to Contentful (using the same URL from GraphiQL)
@@ -58,40 +58,40 @@ export async function getStaticProps() {
   };
 }
 
-// export async function getStaticPaths() {
-//   const res = await fetch(
-//     `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
-//     {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
-//         authorization: `Bearer ${accessToken}`,
-//       },
-//       body: JSON.stringify({
-//         query: `
-//           query {
-//             elementInfoCollection{
-//               items{
-//                 slug
-//               }
-//             }
-//           }
-//         `,
-//       }),
-//     }
-//   );
+export async function getStaticPaths() {
+  const res = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            elementInfoCollection{
+              items{
+                slug
+              }
+            }
+          }
+        `,
+      }),
+    }
+  );
 
-//   const { data } = await res.json();
-//   const slugs = data.elementInfoCollection.items;
+  const { data } = await res.json();
+  const slugs = data.elementInfoCollection.items;
 
-//   const paths = slugs.map(({ slug }) => {
-//     return {
-//       params: { slug: slug },
-//     };
-//   });
+  const paths = slugs.map(({ slug }) => {
+    return {
+      params: { slug: slug },
+    };
+  });
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
