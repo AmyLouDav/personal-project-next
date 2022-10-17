@@ -12,6 +12,7 @@ const nextConfig = {
 };
 
 //needed to add this to get the .env file to work
+//The envs just works in Server Side. To access this envs in Client Side, you need declare in the next.config.js
 module.exports = {
   reactStrictMode: true,
   env: {
