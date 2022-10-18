@@ -48,7 +48,7 @@ export default function Home({ blogData }) {
       <ul>
         {blogData.map((blog) => (
           <li key={blog.slug}>
-            <Link href={`${blog.slug}`}>
+            <Link href={`/posts${blog.slug}`}>
               <a>{blog.title}</a>
             </Link>
           </li>
