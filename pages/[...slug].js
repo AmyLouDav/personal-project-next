@@ -2,7 +2,6 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ blogData }) {
-  console.log("blog data", blogData);
 
   return (
     <div>
@@ -53,10 +52,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // this gets the second element in the params array which is the slug
-  //this is getting the correct slug
   const slug = `/${params.slug[1]}`;
-  console.log(slug);
 
   try {
     const res = await fetch(
@@ -100,8 +96,6 @@ export async function getStaticProps({ params }) {
     }
 
     const { data } = await res.json();
-
-    console.log("data", data.blogPagesCollection.items);
 
     const [blogData] = data.blogPagesCollection.items;
 
