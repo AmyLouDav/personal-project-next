@@ -20,6 +20,7 @@ export default function Home({ infoData }) {
   );
 }
 
+
 export async function getStaticProps() {
   // send a request to Contentful (using the same URL from GraphiQL)
   const res = await fetch(
