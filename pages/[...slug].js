@@ -7,8 +7,8 @@ export default function Post({ blogData }) {
   return (
     <div>
       <h1>this is a dynamic page </h1>
-      {/* <h1>{blogData.title}</h1>
-      <p>{blogData.description}</p> */}
+      <h1>{blogData.content.title}</h1>
+      <p>{blogData.content.description}</p>
     </div>
   );
 }
@@ -55,7 +55,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // this gets the second element in the params array which is the slug
   //this is getting the correct slug
-  const slug = params.slug[1];
+  const slug = `/${params.slug[1]}`;
+  console.log(slug);
 
   try {
     const res = await fetch(
@@ -69,21 +70,21 @@ export async function getStaticProps({ params }) {
 
         body: JSON.stringify({
           query: `
-            query GetBlog($slug: String!) {
-              blogPagesCollection (
-                  where: {
-                    slug: $slug
-                  },
-                  limit: 1
-                ) {
-                  items {
-                    content {
-                      slug
-                      title
-                      description
-                    }
+            query Getpost($slug: String!) {
+              blogPagesCollection(
+                where: {
+                  slug: $slug
+                },
+                limit: 1
+              ) {
+                items {
+                  content {
+                    slug
+                    title
+                    description
                   }
-                  }
+                }
+              }
             }
           `,
           variables: {
@@ -93,20 +94,20 @@ export async function getStaticProps({ params }) {
       }
     );
 
-    console.log("after query");
+    if (!res.ok) {
+      console.error(res);
+      return {};
+    }
 
-    const data = await res.json(); // this doesn't return anything so there must be something wrong with the query
+    const { data } = await res.json();
 
-    console.log("after data");
+    console.log("data", data.blogPagesCollection.items);
 
-    console.log("data", data);
-
-    const blogData  = data.blogPagesCollection.items.content.title;
-    console.log("blog data title", blogData.title);
+    const [blogData] = data.blogPagesCollection.items;
 
     return {
       props: {
-        slug: blogData,
+        blogData
       },
     };
   } catch (e) {
