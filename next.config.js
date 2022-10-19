@@ -18,4 +18,7 @@ module.exports = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
+  images: {
+    domains: ["images.ctfassets.net"]
+  }
 };

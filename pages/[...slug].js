@@ -1,13 +1,20 @@
+import Image from "next/Image";
+
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ blogData }) {
-
   return (
     <div>
-      <h1>this is a dynamic page </h1>
       <h1>{blogData.content.title}</h1>
       <p>{blogData.content.description}</p>
+      <Image
+        src={blogData.content.image.url}
+        placeholder=""
+        width={750}
+        height={500}
+        alt={blogData.content.image.description}
+      />
     </div>
   );
 }
@@ -78,6 +85,10 @@ export async function getStaticProps({ params }) {
                     slug
                     title
                     description
+                    image{
+                      url
+                      description
+                    }
                   }
                 }
               }
@@ -101,7 +112,7 @@ export async function getStaticProps({ params }) {
 
     return {
       props: {
-        blogData
+        blogData,
       },
     };
   } catch (e) {
