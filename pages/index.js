@@ -1,67 +1,81 @@
-import Link from "next/link";
+import Image from "next/Image";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
-export default function Home({ infoData }) {
+export default function Post({ infoData }) {
   const { content } = infoData;
   return (
-    <>
-      <p>This is the index page</p>
-    </>
+    <div>
+      <h1>{content.title}</h1>
+     
+      {content.image && (
+        <Image
+          src={content.image.url}
+          placeholder=""
+          layout="responsive"
+          width="500px"
+          height="400px"
+          alt={content?.image?.description}
+        />
+      )}
+      <p>{content.description}</p>
+    </div>
   );
 }
 
-// export default function Home({ infoData }) {
-//   return (
-//     <>
-//       <p>This is the index page it shouldn't be a list</p>
-//       <ul>
-//         {infoData.map((info) => (
-//           <li key={info.content.slug}>
-//             <Link href={`${info.content.slug}`}>
-//               <a>{info.content.title}</a>
-//             </Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// }
-
 export async function getStaticProps() {
-  // send a request to Contentful (using the same URL from GraphiQL)
+  // this is inefficient as it can only be this value
+  const slug = `/home`;
+
   try {
     const res = await fetch(
       `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
       {
-        method: "POST", // GraphQL *always* uses POST requests
+        method: "POST",
         headers: {
           "content-type": "application/json",
-          authorization: `Bearer ${accessToken}`, // add access token header
+          authorization: `Bearer ${accessToken}`,
         },
-        // send the query written in GraphiQL as a string
+
         body: JSON.stringify({
-          // all requests start with "query:" stringify for convenience
           query: `
-          query {
-              infoPageCollection{
-                items{
-                  content{
-                  slug
-                  title
+            query GetPost($slug: String!) {
+              infoPageCollection(
+                where: {
+                  slug: $slug
+                },
+                limit: 1
+              ) {
+                items {
+                  content {
+                    slug
+                    title
+                    description
+                    image{
+                      url
+                      description
+                    }
                   }
                 }
               }
             }
-        `,
+          `,
+          variables: {
+            slug,
+          },
         }),
       }
     );
-    // grab the data from the response
+
+    if (!res.ok) {
+      console.error(res);
+      return {};
+    }
+
     const { data } = await res.json();
-    console.log("data", data);
-    const infoData = data.infoPageCollection.items;
+
+    const [infoData] = data.infoPageCollection.items;
 
     return {
       props: {
