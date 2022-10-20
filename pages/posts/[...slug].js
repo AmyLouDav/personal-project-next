@@ -4,17 +4,19 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ blogData }) {
+  const data = blogData.content;
   return (
     <div>
-      <h1>{blogData.content.title}</h1>
-      <p>{blogData.content.description}</p>
-      {blogData.content.image && (
+      <h1>{data.title}</h1>
+      <p>{data.description}</p>
+      {data.image && (
         <Image
-          src={blogData.content.image.url}
+          src={data.image.url}
           placeholder=""
-          width={750}
-          height={500}
-          alt={blogData.content.image.description}
+          layout="responsive"
+          width="500px"
+          height="400px"
+          alt={data?.image?.description}
         />
       )}
     </div>
@@ -22,16 +24,17 @@ export default function Post({ blogData }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        query: `
+  try {
+    const res = await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          query: `
           query {
             blogPagesCollection{
               items{
@@ -40,24 +43,37 @@ export async function getStaticPaths() {
             }
           }
         `,
-      }),
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      console.error(res);
+      return {};
     }
-  );
 
-  const { data } = await res.json();
-  const blogSlugs = data.blogPagesCollection.items;
-  const paths = blogSlugs.map((blogSlug) => {
-    const { slug } = blogSlug;
-    const fullSlug = `article${slug}`;
+    const { data } = await res.json();
+    const blogSlugs = data.blogPagesCollection.items;
+    const paths = blogSlugs.map((blogSlug) => {
+      const { slug } = blogSlug;
+      const fullSlug = `article${slug}`;
+      return {
+        params: { slug: fullSlug.split("/") },
+      };
+    });
+
     return {
-      params: { slug: fullSlug.split("/") },
+      paths,
+      fallback: false,
     };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
+  } catch (e) {
+    console.log("error", e);
+    return {
+      props: {
+        notFound: true,
+      },
+    };
+  }
 }
 
 export async function getStaticProps({ params }) {
@@ -72,7 +88,6 @@ export async function getStaticProps({ params }) {
           "content-type": "application/json",
           authorization: `Bearer ${accessToken}`,
         },
-
         body: JSON.stringify({
           query: `
             query GetPost($slug: String!) {

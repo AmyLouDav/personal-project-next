@@ -4,17 +4,19 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ infoData }) {
+  const data = infoData.content;
   return (
     <div>
-      <h1>{infoData.content.title}</h1>
-      <p>{infoData.content.description}</p>
-      {infoData.content.image && (
+      <h1>{data.title}</h1>
+      <p>{data.description}</p>
+      {data.image && (
         <Image
-          src={infoData.content.image.url}
+          src={data.image.url}
           placeholder=""
-          width={750}
-          height={500}
-          alt={infoData?.content?.image?.description}
+          layout="responsive"
+          width="500px"
+          height="400px"
+          alt={data?.image?.description}
         />
       )}
     </div>
@@ -22,16 +24,17 @@ export default function Post({ infoData }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        query: `
+  try {
+    const res = await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          query: `
           query {
             infoPageCollection{
               items{
@@ -40,24 +43,33 @@ export async function getStaticPaths() {
             }
           }
         `,
-      }),
-    }
-  );
+        }),
+      }
+    );
 
-  const { data } = await res.json();
-  const infoPageSlugs = data.infoPageCollection.items;
-  const paths = infoPageSlugs.map((pageSlug) => {
-    const { slug } = pageSlug;
-    const fullSlug = `info${slug}`;
+    const { data } = await res.json();
+    const infoPageSlugs = data.infoPageCollection.items;
+    const paths = infoPageSlugs.map((pageSlug) => {
+      const { slug } = pageSlug;
+      const fullSlug = `info${slug}`;
+
+      return {
+        params: { slug: fullSlug.split("/") },
+      };
+    });
+
     return {
-      params: { slug: fullSlug.split("/") },
+      paths,
+      fallback: false,
     };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
+  } catch (e) {
+    console.log("error", e);
+    return {
+      props: {
+        notFound: true,
+      },
+    };
+  }
 }
 
 export async function getStaticProps({ params }) {
