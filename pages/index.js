@@ -4,12 +4,11 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Home({ infoData }) {
+  const data = infoData.content;
   return (
     <>
       <p>This is the index page</p>
-
-            {/* <p>{infoData.content.title}</p> */}
-</>
+    </>
   );
 }
 
@@ -32,18 +31,19 @@ export default function Home({ infoData }) {
 
 export async function getStaticProps() {
   // send a request to Contentful (using the same URL from GraphiQL)
-  const res = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
-    {
-      method: "POST", // GraphQL *always* uses POST requests
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`, // add access token header
-      },
-      // send the query written in GraphiQL as a string
-      body: JSON.stringify({
-        // all requests start with "query:" stringify for convenience
-        query: `
+  try {
+    const res = await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
+      {
+        method: "POST", // GraphQL *always* uses POST requests
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${accessToken}`, // add access token header
+        },
+        // send the query written in GraphiQL as a string
+        body: JSON.stringify({
+          // all requests start with "query:" stringify for convenience
+          query: `
           query {
               infoPageCollection{
                 items{
@@ -55,17 +55,25 @@ export async function getStaticProps() {
               }
             }
         `,
-      }),
-    }
-  );
-  // grab the data from the response
-  const { data } = await res.json();
-  console.log("data", data)
-  const infoData = data.infoPageCollection.items;
+        }),
+      }
+    );
+    // grab the data from the response
+    const { data } = await res.json();
+    console.log("data", data);
+    const infoData = data.infoPageCollection.items;
 
-  return {
-    props: {
-      infoData,
-    },
-  };
+    return {
+      props: {
+        infoData,
+      },
+    };
+  } catch (e) {
+    console.log("error", e);
+    return {
+      props: {
+        notFound: true,
+      },
+    };
+  }
 }
