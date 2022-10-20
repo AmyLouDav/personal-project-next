@@ -46,7 +46,7 @@ export async function getStaticPaths() {
   const blogSlugs = data.blogPagesCollection.items;
   const paths = blogSlugs.map((blogSlug) => {
     const { slug } = blogSlug;
-    const fullSlug = `posts${slug}`;
+    const fullSlug = `article${slug}`;
     return {
       params: { slug: fullSlug.split("/") },
     };

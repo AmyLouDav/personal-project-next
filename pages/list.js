@@ -10,7 +10,7 @@ export default function List({ blogData }) {
       <ul>
         {blogData.map((blog) => (
           <li key={blog.content.slug}>
-            <Link href={`posts${blog.content.slug}`}>
+            <Link href={`posts/article${blog.content.slug}`}>
               <a>{blog.content.title}</a>
             </Link>
           </li>
