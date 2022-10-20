@@ -4,7 +4,7 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Home({ infoData }) {
-  const data = infoData.content;
+  const { content } = infoData;
   return (
     <>
       <p>This is the index page</p>

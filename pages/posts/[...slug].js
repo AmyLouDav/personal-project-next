@@ -4,19 +4,19 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ blogData }) {
-  const data = blogData.content;
+  const { content } = blogData;
   return (
     <div>
-      <h1>{data.title}</h1>
-      <p>{data.description}</p>
-      {data.image && (
+      <h1>{content.title}</h1>
+      <p>{content.description}</p>
+      {content.image && (
         <Image
-          src={data.image.url}
+          src={content.image.url}
           placeholder=""
           layout="responsive"
           width="500px"
           height="400px"
-          alt={data?.image?.description}
+          alt={content?.image?.description}
         />
       )}
     </div>
