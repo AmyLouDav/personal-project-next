@@ -8,13 +8,15 @@ export default function Post({ blogData }) {
     <div>
       <h1>{blogData.content.title}</h1>
       <p>{blogData.content.description}</p>
-      <Image
-        src={blogData.content.image.url}
-        placeholder=""
-        width={750}
-        height={500}
-        alt={blogData.content.image.description}
-      />
+      {blogData.content.image && (
+        <Image
+          src={blogData.content.image.url}
+          placeholder=""
+          width={750}
+          height={500}
+          alt={blogData.content.image.description}
+        />
+      )}
     </div>
   );
 }

@@ -4,18 +4,19 @@ const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ infoData }) {
-  console.log("infodata", infoData)
   return (
     <div>
       <h1>{infoData.content.title}</h1>
       <p>{infoData.content.description}</p>
-      {infoData.content.image && (<Image
-        src={infoData.content.image.url}
-        placeholder=""
-        width={750}
-        height={500}
-        alt={infoData?.content?.image?.description}
-      />)}
+      {infoData.content.image && (
+        <Image
+          src={infoData.content.image.url}
+          placeholder=""
+          width={750}
+          height={500}
+          alt={infoData?.content?.image?.description}
+        />
+      )}
     </div>
   );
 }
@@ -49,10 +50,10 @@ export async function getStaticPaths() {
     const { slug } = pageSlug;
     const fullSlug = `info${slug}`;
     return {
-      params: { info: fullSlug.split("/") },
+      params: { slug: fullSlug.split("/") },
     };
   });
-  console.log("paths", paths);
+
   return {
     paths,
     fallback: false,
@@ -60,8 +61,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const info = `/${params.info[1]}`;
-  console.log("params", info)
+  const slug = `/${params.slug[1]}`;
 
   try {
     const res = await fetch(
@@ -75,10 +75,10 @@ export async function getStaticProps({ params }) {
 
         body: JSON.stringify({
           query: `
-            query GetPost($info: String!) {
+            query GetPost($slug: String!) {
               infoPageCollection(
                 where: {
-                  slug: $info
+                  slug: $slug
                 },
                 limit: 1
               ) {
@@ -97,7 +97,7 @@ export async function getStaticProps({ params }) {
             }
           `,
           variables: {
-            info,
+            slug,
           },
         }),
       }
