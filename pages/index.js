@@ -7,19 +7,28 @@ export default function Home({ infoData }) {
   return (
     <>
       <p>This is the index page</p>
-      <ul>
-        {infoData.map((info) => (
-          <li key={info.content.slug}>
-            <Link href={`${info.content.slug}`}>
-              <a>{info.content.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </>
+
+            {/* <p>{infoData.content.title}</p> */}
+</>
   );
 }
 
+// export default function Home({ infoData }) {
+//   return (
+//     <>
+//       <p>This is the index page it shouldn't be a list</p>
+//       <ul>
+//         {infoData.map((info) => (
+//           <li key={info.content.slug}>
+//             <Link href={`${info.content.slug}`}>
+//               <a>{info.content.title}</a>
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
 
 export async function getStaticProps() {
   // send a request to Contentful (using the same URL from GraphiQL)
@@ -51,6 +60,7 @@ export async function getStaticProps() {
   );
   // grab the data from the response
   const { data } = await res.json();
+  console.log("data", data)
   const infoData = data.infoPageCollection.items;
 
   return {
