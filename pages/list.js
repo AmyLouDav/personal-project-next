@@ -1,11 +1,19 @@
+import Navbar from "../components/nav-bar/nav-bar";
 import Link from "next/link";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function List({ blogData }) {
+  // const [
+  //   {
+  //     content: { slug, title },
+  //   },
+  // ] = blogData;
+
   return (
     <>
+      <Navbar />
       <h1>Blog Posts</h1>
       <ul>
         {blogData.map((blog) => (

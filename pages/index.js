@@ -1,3 +1,4 @@
+import Navbar from "../components/nav-bar/nav-bar";
 import Image from "next/Image";
 import ReactMarkdown from "react-markdown";
 
@@ -14,6 +15,7 @@ export default function Post({ infoData }) {
   } = infoData;
   return (
     <div>
+      <Navbar />
       <h1>{title}</h1>
       {url && (
         <Image
