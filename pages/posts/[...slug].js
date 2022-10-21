@@ -1,4 +1,5 @@
 import Image from "next/Image";
+import ReactMarkdown from "react-markdown";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -8,7 +9,7 @@ export default function Post({ blogData }) {
   return (
     <div>
       <h1>{content.title}</h1>
-      <p>{content.description}</p>
+
       {content.image && (
         <Image
           src={content.image.url}
@@ -19,6 +20,7 @@ export default function Post({ blogData }) {
           alt={content?.image?.description}
         />
       )}
+      <ReactMarkdown>{content.description}</ReactMarkdown>
     </div>
   );
 }
