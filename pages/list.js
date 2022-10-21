@@ -6,7 +6,7 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 export default function List({ blogData }) {
   return (
     <>
-      <h1>This is the blog list page.</h1>
+      <h1>Blog Posts</h1>
       <ul>
         {blogData.map((blog) => (
           <li key={blog.content.slug}>

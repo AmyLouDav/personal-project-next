@@ -1,29 +1,31 @@
 import Image from "next/Image";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function Post({ infoData }) {
-  const { content } = infoData;
+  const {
+    content: {
+      title,
+      description,
+      image: { url },
+    },
+  } = infoData;
   return (
     <div>
-      <h1>{content.title}</h1>
-     
-      {content.image && (
+      <h1>{title}</h1>
+      {url && (
         <Image
-          src={content.image.url}
+          src={url}
           placeholder=""
           layout="responsive"
           width="500px"
-          height="400px"
-          alt={content?.image?.description}
+          height="600px"
+          alt={description}
         />
       )}
-      <ReactMarkdown>
-      {content.description}
-      </ReactMarkdown>
-      
+      <ReactMarkdown>{description}</ReactMarkdown>
     </div>
   );
 }
