@@ -1,6 +1,15 @@
 import Navbar from "../components/nav-bar/nav-bar";
 import Image from "next/Image";
 import ReactMarkdown from "react-markdown";
+import {
+  StyledH1,
+  StyledImg,
+  InfoPageImg,
+  StyledText,
+  Container,
+  ContentContainer,
+  TextContainer,
+} from "../styles/index.styles.js";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -13,22 +22,33 @@ export default function Post({ infoData }) {
       image: { url },
     },
   } = infoData;
+
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>{title}</h1>
-      {url && (
-        <Image
-          src={url}
-          placeholder=""
-          layout="responsive"
-          width="500px"
-          height="600px"
-          alt={description}
-        />
-      )}
-      <ReactMarkdown>{description}</ReactMarkdown>
-    </div>
+      <Container>
+        <StyledH1>{title}</StyledH1>
+        <ContentContainer>
+          <InfoPageImg>
+            {url && (
+              <StyledImg
+                src={url}
+                placeholder=""
+                layout="responsive"
+                width="500px"
+                height="650px"
+                alt={description}
+              />
+            )}
+          </InfoPageImg>
+          <TextContainer>
+            <StyledText>
+              <ReactMarkdown>{description}</ReactMarkdown>
+            </StyledText>
+          </TextContainer>
+        </ContentContainer>
+      </Container>
+    </>
   );
 }
 
