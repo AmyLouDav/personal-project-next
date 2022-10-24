@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Tablet, Laptop, PrimaryFont, PrimaryColour } from "../lib/constants";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 
 export const StyledH1 = styled.h1`
   font-size: 40px;
@@ -23,7 +23,7 @@ export const StyledH1 = styled.h1`
 
 export const StyledA = styled.a`
   color: ${PrimaryColour};
-  ${'' /* font-family: ${PrimaryFont}; */}
+  ${"" /* font-family: ${PrimaryFont}; */}
   text-decoration: none;
   font-weight: bold;
   margin-top: 50px;
@@ -63,9 +63,6 @@ export const Wrapper = styled.div`
 `;
 
 export const LinkCardContainer = styled.div`
-
-
-
   @media ${Tablet} {
     display: inline-block;
     height: 300px;

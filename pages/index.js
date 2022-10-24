@@ -101,7 +101,6 @@ export async function getStaticProps() {
     }
 
     const { data } = await res.json();
-
     const [infoData] = data.infoPageCollection.items;
 
     return {

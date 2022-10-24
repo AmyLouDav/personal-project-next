@@ -1,5 +1,4 @@
 import Navbar from "../components/nav-bar/nav-bar";
-
 import {
   StyledH1,
   StyledLink,
@@ -24,7 +23,7 @@ export default function List({ blogData }) {
           <StyledLi key={blog.content.slug}>
             <TitleContainer>
               <StyledLink href={`posts/article${blog.content.slug}`}>
-              <StyledA>{blog.content.title}</StyledA>
+                <StyledA>{blog.content.title}</StyledA>
                 {/* <StyledImg
                   src={blog.content.image.url}
                   placeholder=""
@@ -33,7 +32,6 @@ export default function List({ blogData }) {
                   height="200px"
                   alt={blog.content.description}
                 /> */}
-           
               </StyledLink>
             </TitleContainer>
           </StyledLi>
@@ -44,30 +42,28 @@ export default function List({ blogData }) {
 }
 
 export async function getStaticProps() {
-  // send a request to Contentful (using the same URL from GraphiQL)
   const res = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${space}/environments/master`,
     {
-      method: "POST", // GraphQL *always* uses POST requests
+      method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`, // add access token header
+        authorization: `Bearer ${accessToken}`,
       },
-      // send the query written in GraphiQL as a string
+
       body: JSON.stringify({
-        // all requests start with "query:" stringify for convenience
         query: `
           query {
-              blogPagesCollection{
-                items{
-                  content{
-                  slug
-                  title
-                  description
-                    image{
-                      url
-                    }
+            blogPagesCollection{
+              items{
+                content{
+                slug
+                title
+                description
+                  image{
+                    url
                   }
+                }
               }
             }
           }
@@ -75,7 +71,7 @@ export async function getStaticProps() {
       }),
     }
   );
-  // grab the data from the response
+
   const { data } = await res.json();
   const blogData = data.blogPagesCollection.items;
 

@@ -1,6 +1,4 @@
 import Navbar from "../../components/nav-bar/nav-bar";
-import Image from "next/Image";
-import ReactMarkdown from "react-markdown";
 import {
   StyledH1,
   ContentContainer,
@@ -9,7 +7,6 @@ import {
   StyledText,
   H1Container,
 } from "./blog.styles";
-import { TitleContainer } from "../../styles/list.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -60,14 +57,14 @@ export async function getStaticPaths() {
         },
         body: JSON.stringify({
           query: `
-          query {
-            blogPagesCollection{
-              items{
-                  slug
+            query {
+              blogPagesCollection{
+                items{
+                    slug
+                }
               }
             }
-          }
-        `,
+          `,
         }),
       }
     );
