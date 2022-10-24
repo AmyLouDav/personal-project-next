@@ -1,7 +1,15 @@
 import Navbar from "../components/nav-bar/nav-bar";
-import Link from "next/link";
 
-import { StyledH1, StyledLink, LinkCardContainer, Container } from "../styles/list.styles";
+import {
+  StyledH1,
+  StyledLink,
+  LinkCardContainer,
+  Container,
+  StyledA,
+  StyledLi,
+  StyledImg,
+  TitleContainer,
+} from "../styles/list.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -13,13 +21,22 @@ export default function List({ blogData }) {
       <Container>
         <StyledH1>Blog Posts</StyledH1>
         {blogData.map((blog) => (
-          <li key={blog.content.slug}>
-            <LinkCardContainer>
+          <StyledLi key={blog.content.slug}>
+            <TitleContainer>
               <StyledLink href={`posts/article${blog.content.slug}`}>
-                <a>{blog.content.title}</a>
+              <StyledA>{blog.content.title}</StyledA>
+                {/* <StyledImg
+                  src={blog.content.image.url}
+                  placeholder=""
+                  layout="responsive"
+                  width="300px"
+                  height="200px"
+                  alt={blog.content.description}
+                /> */}
+           
               </StyledLink>
-            </LinkCardContainer>
-          </li>
+            </TitleContainer>
+          </StyledLi>
         ))}
       </Container>
     </>
@@ -47,6 +64,9 @@ export async function getStaticProps() {
                   slug
                   title
                   description
+                    image{
+                      url
+                    }
                   }
               }
             }

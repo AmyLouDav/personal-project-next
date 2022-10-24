@@ -37,7 +37,7 @@ export default function Post({ infoData }) {
                 placeholder=""
                 layout="responsive"
                 width="500px"
-                height="400px"
+                height="380px"
                 alt={description}
               />
             )}

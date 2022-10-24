@@ -7,7 +7,9 @@ import {
   StyledImg,
   TextContainer,
   StyledText,
+  H1Container,
 } from "./blog.styles";
+import { TitleContainer } from "../../styles/list.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -24,7 +26,9 @@ export default function Post({ blogData }) {
   return (
     <div>
       <Navbar />
-      <StyledH1>{title}</StyledH1>
+      <H1Container>
+        <StyledH1>{title}</StyledH1>
+      </H1Container>
       <ContentContainer>
         {url && (
           <StyledImg

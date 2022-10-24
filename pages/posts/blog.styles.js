@@ -51,3 +51,8 @@ export const ContentContainer = styled.div`
   margin: 0 auto 100px auto;
   max-width: 300px;
 `;
+
+export const H1Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
