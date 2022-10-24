@@ -1,0 +1,1 @@
+{"c":["pages/posts/[...slug]","webpack"],"r":["pages/list"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2FUsers%2Fa0834762%2FDocuments%2Fpersonal-project-next%2Fpages%2Flist.js&page=%2Flist!","./pages/list.js","./styles/list.styles.js"]}

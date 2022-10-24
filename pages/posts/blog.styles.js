@@ -1,9 +1,17 @@
 import styled from "styled-components";
-import { Tablet, Laptop, PrimaryFont, SecondaryFont } from "../../lib/constants";
+import {
+  Tablet,
+  Laptop,
+  PrimaryFont,
+  SecondaryFont,
+  PrimaryColour,
+} from "../../lib/constants";
+import ReactMarkdown from "react-markdown";
 
 export const StyledH1 = styled.h1`
   font-size: 20px;
   font-family: ${PrimaryFont};
+  color: ${PrimaryColour};
   font-weight: lighter;
   display: flex;
   justify-content: center;
@@ -26,9 +34,10 @@ export const Wrapper = styled.img`
 export const StyledImg = styled.img`
   display: flex;
   justify-content: center;
+  padding-bottom: 20px;
 `;
 
-export const StyledText = styled.div`
+export const StyledText = styled(ReactMarkdown)`
   color: black;
   font-size: 12px;
   font-family: ${SecondaryFont};
