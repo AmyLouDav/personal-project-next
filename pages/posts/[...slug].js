@@ -1,6 +1,7 @@
 import Navbar from "../../components/nav-bar/nav-bar";
 import Image from "next/Image";
 import ReactMarkdown from "react-markdown";
+import { StyledH1, ContentContainer, StyledImg, TextContainer, StyledText  } from "./blog.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -17,18 +18,24 @@ export default function Post({ blogData }) {
   return (
     <div>
       <Navbar />
-      <h1>{title}</h1>
-      {url && (
-        <Image
-          src={url}
-          placeholder=""
-          layout="responsive"
-          width="500px"
-          height="400px"
-          alt={description}
-        />
-      )}
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <StyledH1>{title}</StyledH1>
+      <ContentContainer>
+        {url && (
+          <StyledImg
+            src={url}
+            placeholder=""
+            layout="responsive"
+            width="300px"
+            height="200px"
+            alt={description}
+          />
+        )}
+        <TextContainer>
+          <StyledText>
+            <ReactMarkdown>{description}</ReactMarkdown>
+          </StyledText>
+        </TextContainer>
+      </ContentContainer>
     </div>
   );
 }

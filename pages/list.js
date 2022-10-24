@@ -1,29 +1,27 @@
 import Navbar from "../components/nav-bar/nav-bar";
 import Link from "next/link";
 
+import { StyledH1, StyledLink, LinkCardContainer, Container } from "../styles/list.styles";
+
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 export default function List({ blogData }) {
-  // const [
-  //   {
-  //     content: { slug, title },
-  //   },
-  // ] = blogData;
-
   return (
     <>
       <Navbar />
-      <h1>Blog Posts</h1>
-      <ul>
+      <Container>
+        <StyledH1>Blog Posts</StyledH1>
         {blogData.map((blog) => (
           <li key={blog.content.slug}>
-            <Link href={`posts/article${blog.content.slug}`}>
-              <a>{blog.content.title}</a>
-            </Link>
+            <LinkCardContainer>
+              <StyledLink href={`posts/article${blog.content.slug}`}>
+                <a>{blog.content.title}</a>
+              </StyledLink>
+            </LinkCardContainer>
           </li>
         ))}
-      </ul>
+      </Container>
     </>
   );
 }
