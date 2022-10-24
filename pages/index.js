@@ -1,5 +1,4 @@
 import Navbar from "../components/nav-bar/nav-bar";
-import Image from "next/Image";
 import ReactMarkdown from "react-markdown";
 import {
   StyledH1,

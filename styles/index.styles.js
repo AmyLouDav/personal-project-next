@@ -1,5 +1,14 @@
 import styled from "styled-components";
-import Image from 'next/Image';
+import Image from "next/Image";
+import "@nextcss/reset";
+
+// import {
+//   Tablet,
+//   Laptop,
+//   PrimaryFont,
+//   PrimaryColour,
+//   SecondaryFont,
+// } from "../lib/constants.js";
 
 export const Tablet = `768px`;
 export const Laptop = `1024px`;
