@@ -1,19 +1,13 @@
 import styled from "styled-components";
 import Image from "next/Image";
 
-// import {
-//   Tablet,
-//   Laptop,
-//   PrimaryFont,
-//   PrimaryColour,
-//   SecondaryFont,
-// } from "../../lib/constants.js";
-
-export const Tablet = `768px`;
-export const Laptop = `1024px`;
-export const PrimaryColour = `#f25731`;
-export const PrimaryFont = `Abril Fatface`;
-export const SecondaryFont = `Signika`;
+import {
+  Tablet,
+  Laptop,
+  PrimaryFont,
+  PrimaryColour,
+  SecondaryFont,
+} from "../../lib/constants.js";
 
 export const Container = styled.div`
   max-width: 1000px;

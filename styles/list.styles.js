@@ -25,7 +25,7 @@ export const StyledA = styled.a`
   color: ${PrimaryColour};
   ${"" /* font-family: ${PrimaryFont}; */}
   text-decoration: none;
-  font-weight: bold;
+  
   margin-top: 50px;
   list-style-type: none;
   &:hover,
