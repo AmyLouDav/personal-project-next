@@ -2,11 +2,9 @@ import Navbar from "../components/nav-bar/nav-bar";
 import {
   StyledH1,
   StyledLink,
-  LinkCardContainer,
   Container,
   StyledA,
   StyledLi,
-  StyledImg,
   TitleContainer,
 } from "../styles/list.styles";
 
@@ -24,14 +22,6 @@ export default function List({ blogData }) {
             <TitleContainer>
               <StyledLink href={`posts/article${blog.content.slug}`}>
                 <StyledA>{blog.content.title}</StyledA>
-                {/* <StyledImg
-                  src={blog.content.image.url}
-                  placeholder=""
-                  layout="responsive"
-                  width="300px"
-                  height="200px"
-                  alt={blog.content.description}
-                /> */}
               </StyledLink>
             </TitleContainer>
           </StyledLi>
