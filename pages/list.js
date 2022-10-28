@@ -1,11 +1,13 @@
 import Navbar from "../components/nav-bar/nav-bar";
+import Image from "next/image";
 import {
-  StyledH1,
-  StyledLink,
   Container,
+  StyledImg,
   StyledA,
   StyledLi,
   TitleContainer,
+  StyledH1,
+  StyledLink,
 } from "../styles/list.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
@@ -23,6 +25,12 @@ export default function List({ blogData }) {
               <StyledLink href={`posts/article${blog.content.slug}`}>
                 <StyledA>{blog.content.title}</StyledA>
               </StyledLink>
+              <StyledImg
+                key={blog.content.sys.id}
+                src={blog.content.image.url}
+                width="200px"
+                height="150px"
+              ></StyledImg>
             </TitleContainer>
           </StyledLi>
         ))}
@@ -47,6 +55,9 @@ export async function getStaticProps() {
             blogPagesCollection{
               items{
                 content{
+                  sys{
+                    id
+                  }
                 slug
                 title
                 description

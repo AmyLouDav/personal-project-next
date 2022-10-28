@@ -85,3 +85,8 @@ export const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const ListImage = styled.img`
+  width: 100px;
+  
+`;
