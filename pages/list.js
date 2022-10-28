@@ -2,6 +2,7 @@ import Navbar from "../components/nav-bar/nav-bar";
 import Image from "next/image";
 import {
   Container,
+  ImgContainer,
   StyledImg,
   StyledA,
   StyledLi,
@@ -21,17 +22,21 @@ export default function List({ blogData }) {
         <StyledH1>Blog Posts</StyledH1>
         {blogData.map((blog) => (
           <StyledLi key={blog.content.slug}>
-            <TitleContainer>
-              <StyledLink href={`posts/article${blog.content.slug}`}>
+            <a href={`posts/article${blog.content.slug}`}>
+              <ImgContainer>
+                <StyledImg
+                  key={blog.content.sys.id}
+                  src={blog.content.image.url}
+                  width="200px"
+                  height="300px"
+                ></StyledImg>
+              </ImgContainer>
+            </a>
+            <StyledLink href={`posts/article${blog.content.slug}`}>
+              <TitleContainer>
                 <StyledA>{blog.content.title}</StyledA>
-              </StyledLink>
-              <StyledImg
-                key={blog.content.sys.id}
-                src={blog.content.image.url}
-                width="200px"
-                height="150px"
-              ></StyledImg>
-            </TitleContainer>
+              </TitleContainer>
+            </StyledLink>
           </StyledLi>
         ))}
       </Container>

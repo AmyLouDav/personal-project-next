@@ -26,7 +26,7 @@ export const StyledA = styled.a`
   ${"" /* font-family: ${PrimaryFont}; */}
   text-decoration: none;
   
-  margin-top: 50px;
+  ${'' /* margin-top: 50px; */}
   list-style-type: none;
   &:hover,
   &:focus {
@@ -88,5 +88,10 @@ export const TitleContainer = styled.div`
 
 export const ListImage = styled.img`
   width: 100px;
-  
+`;
+
+export const ImgContainer = styled.div`
+  margin: 30px;
+  display: flex;
+  justify-content: center;
 `;
