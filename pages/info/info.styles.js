@@ -32,8 +32,8 @@ export const StyledH1 = styled.h1`
   display: flex;
   justify-content: center;
   margin-top: 30px;
-
-  
+  text-transform: ${(isUppercase) =>
+    isUppercase ? "uppercase" : "capitalize"};
 
   @media ${Tablet} {
     font-size: 50px;
@@ -41,6 +41,7 @@ export const StyledH1 = styled.h1`
 
   @media ${Laptop} {
     font-size: 60px;
+    text-transform: capitalize;
   }
 `;
 
