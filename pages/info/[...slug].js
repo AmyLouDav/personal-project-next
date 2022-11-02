@@ -19,6 +19,7 @@ export default function Post({ infoData }) {
   const {
     content: {
       title,
+      isUppercase,
       description,
       image: { url },
     },
@@ -28,7 +29,7 @@ export default function Post({ infoData }) {
     <>
       <Navbar />
       <Container>
-        <StyledH1>{title}</StyledH1>
+        <StyledH1 isUppercase={isUppercase}>{title}</StyledH1>
         <ContentContainer>
           <InfoPageImg>
             {url && (
@@ -128,6 +129,7 @@ export async function getStaticProps({ params }) {
                   content {
                     slug
                     title
+                    isUppercase
                     description
                     image{
                       url

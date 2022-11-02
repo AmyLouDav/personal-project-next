@@ -33,6 +33,8 @@ export const StyledH1 = styled.h1`
   justify-content: center;
   margin-top: 30px;
 
+  
+
   @media ${Tablet} {
     font-size: 50px;
   }

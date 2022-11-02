@@ -25,6 +25,7 @@ export const NavBarContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  z-index: 1;
 `;
 
 export const StyledLink = styled.a`
