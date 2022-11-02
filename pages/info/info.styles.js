@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/Image";
+import "@nextcss/reset";
 
 import {
   Tablet,

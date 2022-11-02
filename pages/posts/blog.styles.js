@@ -7,6 +7,7 @@ import {
   PrimaryColour,
 } from "../../lib/constants";
 import ReactMarkdown from "react-markdown";
+import "@nextcss/reset";
 
 export const StyledH1 = styled.h1`
   font-size: 20px;

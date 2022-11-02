@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Tablet, Laptop, PrimaryFont, PrimaryColour } from "../lib/constants";
 import Link from "next/link";
 import Image from "next/image";
+import "@nextcss/reset";
 
 export const StyledH1 = styled.h1`
   font-size: 40px;
