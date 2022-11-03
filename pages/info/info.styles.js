@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Image from "next/Image";
 import "@nextcss/reset";
-
 import {
   Tablet,
   Laptop,
@@ -25,7 +24,7 @@ export const InfoPageImg = styled.div`
 `;
 
 export const StyledH1 = styled.h1`
-  font-size: 40px;
+  font-size: 45px;
   font-family: ${PrimaryFont};
   color: ${PrimaryColour};
   font-weight: lighter;
@@ -35,12 +34,13 @@ export const StyledH1 = styled.h1`
   text-transform: ${(isUppercase) =>
     isUppercase ? "uppercase" : "capitalize"};
 
-  @media ${Tablet} {
+  @media (min-width: ${Tablet}) {
     font-size: 50px;
+    text-transform: capitalize;
   }
 
-  @media ${Laptop} {
-    font-size: 60px;
+  @media (min-width: ${Laptop}) {
+    font-size: 80px;
     text-transform: capitalize;
   }
 `;
@@ -48,6 +48,11 @@ export const StyledH1 = styled.h1`
 export const StyledImg = styled(Image)`
   display: flex;
   justify-content: center;
+
+  @media (min-width: ${Tablet}) {
+    width: 300px;
+    height: 500px;
+  }
 `;
 
 export const StyledText = styled.div`

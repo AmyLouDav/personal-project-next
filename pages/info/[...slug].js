@@ -29,7 +29,7 @@ export default function Post({ infoData }) {
     <>
       <Navbar />
       <Container>
-        <StyledH1 isUppercase={true}>{title}</StyledH1>
+        <StyledH1 isUppercase={isUppercase}>{title}</StyledH1>
         <ContentContainer>
           <InfoPageImg>
             {url && (
