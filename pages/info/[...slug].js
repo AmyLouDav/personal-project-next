@@ -1,5 +1,4 @@
 import Navbar from "../../components/nav-bar/nav-bar";
-//import Image from "next/Image";
 import ReactMarkdown from "react-markdown";
 
 import {
@@ -10,7 +9,7 @@ import {
   Container,
   InfoPageImg,
   StyledText,
-} from "./info.styles.js";
+} from "../../styles/info.styles.js";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;

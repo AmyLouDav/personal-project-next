@@ -6,7 +6,7 @@ import {
   TextContainer,
   StyledText,
   H1Container,
-} from "./blog.styles";
+} from "../../styles/blog.styles";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
