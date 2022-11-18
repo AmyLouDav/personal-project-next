@@ -7,7 +7,7 @@ import {
   PrimaryColour,
   SecondaryFont,
 } from "../lib/constants.js";
-// import Image from "next/image.js";
+
 
 export const Container = styled.div`
   max-width: 1000px;

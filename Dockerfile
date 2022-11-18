@@ -1,12 +1,7 @@
-FROM node:alpine
+FROM nginx:alpine
 
-RUN mkdir -p Documents/personal-project-next
-WORKDIR /Documents/personal-project-next
+WORKDIR /
 
-COPY . /Documents/personal-project-next
+COPY . .
 
-RUN npm install
-
-RUN npm run build
-EXPOSE 8080
-CMD npm run build
+COPY nginx.conf /etc/nginx/nginx.conf

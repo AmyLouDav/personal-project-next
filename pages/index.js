@@ -52,7 +52,6 @@ export default function Post({ infoData }) {
 }
 
 export async function getStaticProps() {
-  // this is inefficient as it can only be this value
   const slug = `/home`;
 
   try {
