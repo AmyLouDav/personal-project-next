@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Image from "next/Image";
+
 import "@nextcss/reset";
 import {
   Tablet,
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const StyledImg = styled(Image)`
+export const StyledImg = styled.img`
   display: flex;
   justify-content: center;
 `;

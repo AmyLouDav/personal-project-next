@@ -1,5 +1,4 @@
 import Navbar from "../components/nav-bar/nav-bar";
-import Image from "next/image";
 import {
   Container,
   ImgContainer,

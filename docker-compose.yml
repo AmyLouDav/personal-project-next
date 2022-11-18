@@ -1,0 +1,11 @@
+version: "2.12.2"
+
+services:
+    app:
+        container_name: app
+        image: node:alpine
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:81"
